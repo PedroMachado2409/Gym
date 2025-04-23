@@ -1,0 +1,118 @@
+ REGISTRAR USUARIO 
+{
+    "login":"PROFESSOR",
+    "password":"123123",
+    "role":"ADMIN"
+}
+
+
+CADASTRAR EQUIPAMENTOS 
+
+{
+    "nome": "Nome do Equipamento",
+    "carga": 50.5,
+    "dtCadastro": "2025-03-30",
+    "ultimaManutencao": "2025-03-01",
+    "proximaManutencao": "2025-04-01"
+}
+
+
+CADASTRAR PLANOS 
+
+{
+  "nome": "Plano semestral",
+  "descricao": "Acesso livre a todas as áreas da academia",
+  "valor": 150.90,
+  "duracao": 183
+}
+
+
+CADASTRAR FICHAS DE TREINO 
+
+{
+    "aluno": { "id": 1 },
+    "professor": { "id": 2 },
+    "equipamentos": [
+        { "equipamento": { "id": 1 }, "repeticoes": 10 },
+        { "equipamento": { "id": 2 }, "repeticoes": 15 }
+    ],
+    "dataInicio": "2025-04-01",
+    "dataFim": "2025-04-30",
+    "tipoTreino":"A"
+}
+
+
+
+
+Cadastrar Cliente
+
+  {
+    "idUsuario": 2,
+    "nome": "João da Silva",
+    "cpf": "123.456.789-00",
+    "dtNascimento": "24/09/2004",
+    "endereco": "Rua das Flores, 123",
+    "cep": "12345-678"
+  }
+Cadastrar receita
+
+{
+    "descricao":"Receita referente a ....",
+    "vlTotal": 250
+}
+
+Cadastrar Despesa
+
+{
+    "descricao":"Despesa referente a ....",
+    "vlTotal": 1250
+}
+
+
+REALIZAR VENDA
+
+{
+  "cliente": {
+    "id": 1
+  },
+  "itens": [
+    {
+      "produto": {
+        "id": 1
+      },
+      "quantidade": 2,
+      "precoUnitario": 150.00
+    },
+    {
+      "produto": {
+        "id": 2
+      },
+      "quantidade": 1,
+      "precoUnitario": 100.00
+    }
+  ]
+}
+
+CADASTRAR PRODUTOS
+
+{
+  "nome":"produto 1",
+  "estoque":100,
+  "unidade":"caixa"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
