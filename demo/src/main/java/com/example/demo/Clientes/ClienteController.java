@@ -52,10 +52,12 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletarCliente(@PathVariable Long id) {
+    public ResponseEntity<String> deletarCliente(@PathVariable @Valid Long id) {
         clienteService.DeletarCliente(id);
         return ResponseEntity.ok("Cliente deletado com sucesso.");
 
     }
+
+    
 
 }

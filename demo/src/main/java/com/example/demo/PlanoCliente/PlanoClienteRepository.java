@@ -12,4 +12,8 @@ import com.example.demo.Clientes.Cliente;
 public interface PlanoClienteRepository extends JpaRepository<PlanoCliente, Long> {
 
     Optional<PlanoCliente> findByCliente(Cliente cliente);
+
+    Optional<PlanoCliente> findByCliente_Id(Long clienteId);
+
+    
 }

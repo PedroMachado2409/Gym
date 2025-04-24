@@ -30,5 +30,8 @@ public class ClienteRequestDTO {
 
     @NotBlank(message = "cep é obrigatorio")
     private String cep;
+
+    @NotBlank(message = "Email é obrigatório")
+    private String email;
     
 }

@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.PlanoCliente.PlanoCliente;
+import com.example.demo.PlanoCliente.PlanoClienteRepository;
 import com.example.demo.Users.User;
 import com.example.demo.Users.UserRepository;
 
@@ -20,6 +22,9 @@ public class ClienteService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PlanoClienteRepository planoClienteRepository;
+
     public Cliente cadastrarCliente(ClienteRequestDTO dto) {
         User user = userRepository.findById(dto.getIdUsuario())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
@@ -31,7 +36,9 @@ public class ClienteService {
         cliente.setDtNascimento(dto.getDtNascimento());
         cliente.setEndereco(dto.getEndereco());
         cliente.setCep(dto.getCep());
+        cliente.setEmail(dto.getEmail());
         cliente.setDtCadastro(LocalDate.now());
+
 
         return clienteRepository.save(cliente);
     }
@@ -109,12 +116,24 @@ public class ClienteService {
         cliente.setDtNascimento(dto.getDtNascimento());
         cliente.setEndereco(dto.getEndereco());
         cliente.setCep(dto.getCep());
+        cliente.setEmail(dto.getEmail());
 
         return clienteRepository.save(cliente);
     }
 
     public void DeletarCliente(Long id) {
+        
+        Cliente cliente = clienteRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Cliente não encontrado !"));
+
+        Optional<PlanoCliente> planoCliente = planoClienteRepository.findByCliente_Id(cliente.getId());
+
+        if (planoCliente.isPresent()) {
+           throw new RuntimeException("Não é possivel deletar o cliente, pois o mesmo tem um plano ativo");
+        }
+
         clienteRepository.deleteById(id);
+
     }
 
 }
