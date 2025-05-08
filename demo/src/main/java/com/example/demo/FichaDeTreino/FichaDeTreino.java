@@ -24,13 +24,11 @@ public class FichaDeTreino {
     @ManyToOne
     private User professor;
 
-    @OneToMany
+    @OneToMany(mappedBy = "ficha", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemFichaTreino> equipamentos;
 
     private LocalDate dataInicio;
     private LocalDate dataFim;
     
-    private String tipoTreino;  
-
-   
+    private String tipoTreino;
 }

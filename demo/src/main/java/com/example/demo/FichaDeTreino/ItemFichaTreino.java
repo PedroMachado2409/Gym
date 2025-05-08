@@ -1,44 +1,27 @@
 package com.example.demo.FichaDeTreino;
 
 import com.example.demo.Equipamento.Equipamento;
-
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
+@Table(name = "ItemFichaTreino")
 public class ItemFichaTreino {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "equipamento_id", nullable = false)
-    private Equipamento equipamento;
-
     private int repeticoes;
 
-   
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "ficha_id")
+    private FichaDeTreino ficha;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Equipamento getEquipamento() {
-        return equipamento;
-    }
-
-    public void setEquipamento(Equipamento equipamento) {
-        this.equipamento = equipamento;
-    }
-
-    public int getRepeticoes() {
-        return repeticoes;
-    }
-
-    public void setRepeticoes(int repeticoes) {
-        this.repeticoes = repeticoes;
-    }
+    @ManyToOne
+    @JoinColumn(name = "equipamento_id")
+    private Equipamento equipamento;
 }

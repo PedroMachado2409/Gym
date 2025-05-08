@@ -5,10 +5,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 
 import java.util.Collection;
 import java.util.List;
@@ -16,24 +16,25 @@ import java.util.List;
 @Table(name = "users")
 @Entity(name = "users")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    private Long id; // Alterado para Long
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @NotNull(message = "Login é obrigatorio")
+    @NotNull(message = "Login é obrigatório")
     private String login;
-    @NotNull(message = "Senha é obrigatoria")
+
+    @NotNull(message = "Senha é obrigatória")
     private String password;
 
-
-    @Enumerated(EnumType.STRING) 
+    @Enumerated(EnumType.STRING)
     @NotNull(message = "Role é obrigatório")
     private UserRole role;
 
-    public User(String login, String password, UserRole role){
+    public User(String login, String password, UserRole role) {
         this.login = login;
         this.password = password;
         this.role = role;
@@ -41,21 +42,16 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+        if (this.role == UserRole.ADMIN) {
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        } else {
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        }
     }
 
     @Override
     public String getUsername() {
         return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     @Override

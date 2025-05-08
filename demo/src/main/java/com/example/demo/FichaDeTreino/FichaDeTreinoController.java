@@ -50,10 +50,10 @@ public class FichaDeTreinoController {
 
     private FichaDeTreinoResponseDTO convertToDTO(FichaDeTreino ficha) {
         FichaDeTreinoResponseDTO dto = new FichaDeTreinoResponseDTO();
-        dto.setIdFicha(ficha.getId()); // Setando o ID da Ficha
+        dto.setIdFicha(ficha.getId()); 
         dto.setNomeAluno(ficha.getAluno().getLogin());
         dto.setNomeProfessor(ficha.getProfessor().getLogin());
-        dto.setTipoTreino(ficha.getTipoTreino()); // Setando o tipo de treino
+        dto.setTipoTreino(ficha.getTipoTreino()); 
         dto.setEquipamentos(ficha.getEquipamentos().stream()
             .map(item -> {
                 FichaDeTreinoResponseDTO.ItemFichaTreinoResponseDTO itemDTO = new FichaDeTreinoResponseDTO.ItemFichaTreinoResponseDTO();

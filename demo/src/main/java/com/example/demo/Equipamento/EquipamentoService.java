@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -19,6 +20,16 @@ public class EquipamentoService {
 
     
     public Equipamento salvarEquipamento(EquipamentoRequestDTO dto) {
+
+        if (Objects.isNull(dto.getNome())) {
+            throw new IllegalArgumentException("O nome do equipamento é obrigatório.");
+        }
+        if (Objects.isNull(dto.getCarga())) {
+            throw new IllegalArgumentException("A carga do equipamento é obrigatória.");
+        }
+        if (Objects.isNull(dto.getUltimaManutencao())) {
+            throw new IllegalArgumentException("A data da última manutenção é obrigatória.");
+        }
         
         Equipamento equipamento = new Equipamento();
         equipamento.setCarga(dto.getCarga());

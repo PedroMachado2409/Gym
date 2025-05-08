@@ -28,9 +28,9 @@ public class PlanoClienteController {
     }
 
     @GetMapping("/{id}")
-    public PlanoCliente buscarPorId(@PathVariable Long id) {
-        return planoClienteService.buscarPorId(id)
-            .orElseThrow(() -> new RuntimeException("PlanoCliente não encontrado com id " + id));
+    public PlanoClienteResponseDTO buscarPorId(@PathVariable Long id) {
+        return planoClienteService.buscarPorId(id);
+           
     }
 
     @DeleteMapping("/{id}")
@@ -39,9 +39,4 @@ public class PlanoClienteController {
         return ResponseEntity.ok().body("Assinatura excluida com sucesso !");
     }
 
-    @PostMapping("/{id}/reenviarEmail")
-    public ResponseEntity<?> reenviarEmailDeConfirmacao(@PathVariable Long id) {
-        planoClienteService.reenviarEmailDeConfirmacao(id);
-        return ResponseEntity.ok().body("Email enviado com sucesso !");
-    }
 }

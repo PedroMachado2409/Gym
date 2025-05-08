@@ -26,24 +26,6 @@ CADASTRAR PLANOS
   "duracao": 183
 }
 
-
-CADASTRAR FICHAS DE TREINO 
-
-{
-    "aluno": { "id": 1 },
-    "professor": { "id": 2 },
-    "equipamentos": [
-        { "equipamento": { "id": 1 }, "repeticoes": 10 },
-        { "equipamento": { "id": 2 }, "repeticoes": 15 }
-    ],
-    "dataInicio": "2025-04-01",
-    "dataFim": "2025-04-30",
-    "tipoTreino":"A"
-}
-
-
-
-
 Cadastrar Cliente
 
   {
@@ -68,38 +50,6 @@ Cadastrar Despesa
     "vlTotal": 1250
 }
 
-
-REALIZAR VENDA
-
-{
-  "cliente": {
-    "id": 1
-  },
-  "itens": [
-    {
-      "produto": {
-        "id": 1
-      },
-      "quantidade": 2,
-      "precoUnitario": 150.00
-    },
-    {
-      "produto": {
-        "id": 2
-      },
-      "quantidade": 1,
-      "precoUnitario": 100.00
-    }
-  ]
-}
-
-CADASTRAR PRODUTOS
-
-{
-  "nome":"produto 1",
-  "estoque":100,
-  "unidade":"caixa"
-}
 
 
 

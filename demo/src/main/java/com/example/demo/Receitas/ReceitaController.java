@@ -29,13 +29,10 @@ public class ReceitaController {
         return ResponseEntity.ok().body("Receita Cadastrada com sucesso");
     }
     
-
     @GetMapping
     public List<ReceitaResponseDTO> listarReceitas (){
         return receitaService.listarReceitas();
     }
-
-
 
     @PutMapping("/baixar/{id}")
     public ResponseEntity<ReceitaResponseDTO> baixarReceita(@PathVariable Long id){

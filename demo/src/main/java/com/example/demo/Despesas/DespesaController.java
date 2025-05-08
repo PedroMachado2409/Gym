@@ -65,7 +65,13 @@ public class DespesaController {
         return ResponseEntity.ok(responseDTO);
     }
 
-    @DeleteMapping("{id}")
+    @PutMapping("/{id}")
+    public ResponseEntity<?> editarDespesa(@PathVariable Long id, @RequestBody DespesaRequestDTO despesaRequestDTO){
+        despesaService.atualizarDespesa(id, despesaRequestDTO);
+        return ResponseEntity.ok().body("Despesa Atualizada com Sucesso");
+    }
+
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deletarDespesa(@PathVariable @Valid Long id){
         despesaService.deletarDespesa(id);
         return ResponseEntity.ok().body("Despesa Deletada com sucesso!");

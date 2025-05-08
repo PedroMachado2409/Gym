@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Clientes.Cliente;
 import com.example.demo.Clientes.ClienteRepository;
-import com.example.demo.Email.EmailService;
 import com.example.demo.Plano.Plano;
 import com.example.demo.Plano.PlanoRepository;
 import com.example.demo.Receitas.Receita;
@@ -37,7 +36,6 @@ public class PlanoClienteService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired EmailService emailService;
 
     public PlanoCliente criarPlanoCliente(PlanoClienteRequestDTO dto) {
         Plano plano = planoRepository.findById(dto.getPlanoId())
@@ -71,12 +69,6 @@ public class PlanoClienteService {
         receita.setUserId(user);
         receitaRepository.save(receita);
 
-        try {
-            emailService.enviarEmailDeNovoPlano(planoCliente);
-        } catch (Exception e) {
-            throw new RuntimeException("Plano vinculado ao cliente, porém não foi possível enviar o e-mail. Por favor, verifique as configurações de SMTP e a conexão de rede.", e); // Inclua a exceção original para melhor diagnóstico
-        }
-
         return planoCliente;
     }
 
@@ -94,8 +86,20 @@ public class PlanoClienteService {
                 planoCliente.getDataFim())).toList();
     }
 
-    public Optional<PlanoCliente> buscarPorId(Long id) {
-        return planoClienteRepository.findById(id);
+    public PlanoClienteResponseDTO buscarPorId(Long id) {
+        PlanoCliente planoCliente = planoClienteRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Assinatura do cliente não encontrada !"));
+    
+        return new PlanoClienteResponseDTO(
+            planoCliente.getId(),
+            planoCliente.getCliente().getNome(), 
+            planoCliente.getPlano().getNome(),   
+            planoCliente.getPlano().getValor(),  
+            planoCliente.getPlano().getDuracao(), 
+            planoCliente.getPlano().getDescricao(), 
+            planoCliente.getDataInicio(),        
+            planoCliente.getDataFim()            
+        );
     }
 
     public void deletarPorId(Long id) {
@@ -114,15 +118,5 @@ public class PlanoClienteService {
         
     }
 
-    public void reenviarEmailDeConfirmacao(Long id) {
-        PlanoCliente plano = planoClienteRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Plano não encontrado!"));
-    
-        try {
-            emailService.enviarEmailDeNovoPlano(plano);
-        } catch (Exception e) {
-            throw new RuntimeException("Erro ao enviar e-mail. Verifique configurações de SMTP", e);
-        }
-    }
 
 }
