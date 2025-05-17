@@ -17,9 +17,7 @@ public class FichaDeTreinoController {
 
     @GetMapping
     public List<FichaDeTreinoResponseDTO> listarTodas() {
-        return service.listarTodas().stream()
-            .map(this::convertToDTO)
-            .collect(Collectors.toList());
+        return service.listarFichas();
     }
 
     @GetMapping("/{id}")
